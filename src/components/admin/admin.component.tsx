@@ -1,21 +1,10 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
+import React from "react";
 import "./admin.css";
-import SignupModal from "../signup-modal/signup-modal.cmponent";
 
 const Admin = () => {
-    const [modalIsOpen, setModalIsOpen] = useState(false);
     return(
         <div className="p-4">
-            <button className="position: absolute right-4 bg-purple-800 text-white rounded w-1/6 h-10"
-            onClick={() => setModalIsOpen(true)}
-            >Register client</button>
-            <Modal className="position: absolute w-full h-full top-auto bg-black bg-opacity-5"
-            isOpen={modalIsOpen}>
-                <p className="position: absolute top-32 left-2/3 z-10 cursor-pointer rotate-45 text-3xl" 
-                onClick={() => setModalIsOpen(false)}> + </p>
-                <SignupModal />
-            </Modal>
+            <button className="position: absolute right-4 bg-purple-800 text-white rounded w-1/6 h-10">Register client</button>
             <table className="position: absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-gray border-solid border-2">
                 <thead>
                     <tr className="">

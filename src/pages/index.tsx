@@ -4,6 +4,7 @@ import PhonenumberPage from "./phone-number";
 import Signup from "./signup";
 import Dashboard from "./dashboard";
 import AdminPage from "./admin";
+import Login from "./login";
 
 const Pages = () => {
 
@@ -14,6 +15,7 @@ const Pages = () => {
             <Route  path="/register" element={<Signup />}/>
             <Route  path="/dashboard" element={<Dashboard />}/>
             <Route  path="/admin" element={<AdminPage />}/>
+            <Route  path="/admin-login" element={<Login />}/>
             </Routes>
         </Router>
     )

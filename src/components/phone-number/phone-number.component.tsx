@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./phone-number.css";
 
 const PhoneNumber = () => {
@@ -6,7 +7,7 @@ const PhoneNumber = () => {
         <div className="flex flex-col p-4 mt-48 content-center flex-wrap">
             <label className="mb-2">Phone Number</label>
             <input className="border-2 border-gray border-solid pl-4 rounded w-2/5 h-10" type="phone" placeholder="Enter your phone number here" />
-            <button className="mt-4 ml-20 bg-purple-800 text-white rounded w-1/4 h-10">Check phone number</button>
+            <button className="mt-4 ml-20 bg-purple-800 text-white rounded w-1/4 h-10"><Link to="/register"> Check phone number</Link></button>
         </div>
     )
 }

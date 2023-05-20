@@ -4,7 +4,6 @@ import "./admin.css";
 const Admin = () => {
     return(
         <div className="p-4">
-            <button className="position: absolute right-4 bg-purple-800 text-white rounded w-1/6 h-10">Register client</button>
             <table className="position: absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-gray border-solid border-2">
                 <thead>
                     <tr className="">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 type Inputs = {
 	firstName: string;
@@ -8,32 +9,32 @@ type Inputs = {
 	phoneNumber: string;
 };
 
-const SignupForm = (data: any) => {
+const SignupForm = () => {
 	const { register, handleSubmit } = useForm<Inputs>();
-	const addToQueue: SubmitHandler<Inputs> = () => {
+	const addToQueue: SubmitHandler<Inputs> = (data: any) => {
 		console.log('test done');
-		fetch('https://duro.herokuapp.com/api/requester/Bournvita/Micheal/queue', {
-			method: 'post',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
+		// fetch('https://duro.herokuapp.com/api/requester/Bournvita/Micheal/queue', {
+		//     method: "post",
+		//     headers: {
+		//         'Accept': 'application/json',
+		//         'Content-Type': 'application/json',
+		//     },
 
-			//make sure to serialize your JSON body
-			body: JSON.stringify({
-				given_name: data.firstName,
-				family_name: data.lastName,
-				email: data.emailAddress,
-				telephone: data.phoneNumber,
-			}),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (data.success === true) {
-					console.log(data);
-					alert('profile created!');
-				}
-			});
+		//     //make sure to serialize your JSON body
+		//     body: JSON.stringify({
+		//         "given_name": data.firstName,
+		//         "family_name": data.lastName,
+		//         "email": data.emailAddress,
+		//         "telephone": data.phoneNumber,
+		//         })
+		//     })
+		//     .then(response => response.json())
+		//     .then(data =>{
+		//         if (data.success === true) {
+		//             console.log(data)
+		//             alert("profile created!");
+		//         }
+		//     });
 	};
 
 	return (
@@ -68,7 +69,9 @@ const SignupForm = (data: any) => {
 					placeholder='Enter your phone number'
 					{...register('phoneNumber', { required: true })}
 				/>
-				<button className='mt-4 ml-20 bg-purple-800 text-white rounded w-2/5 h-10'>Join the queue</button>
+				<button className='mt-4 ml-20 bg-purple-800 text-white rounded w-2/5 h-10'>
+					<Link to='/dashboard'>Join the queue</Link>
+				</button>
 			</form>
 		</div>
 	);

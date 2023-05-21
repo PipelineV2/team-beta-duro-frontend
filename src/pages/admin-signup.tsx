@@ -1,12 +1,13 @@
-import React from "react";
-import AdminSignupForm from "../components/admin-signup/admin-signup.component";
+import React from 'react';
+import AdminSignupForm from '../components/admin-signup/admin-signup.component';
+import AdminSignup from '../components/admin-signup';
 
-const AdminSignup = () => {
-    return(
-        <div>
-            <AdminSignupForm />
-        </div>
-    )
-}
+const AdminSignupPage = () => {
+	return (
+		<div>
+			<AdminSignup />
+		</div>
+	);
+};
 
-export default AdminSignup;
+export default AdminSignupPage;

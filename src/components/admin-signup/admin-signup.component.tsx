@@ -17,7 +17,7 @@ type Inputs = {
   };
 
 const AdminSignupForm = () => {
-    const { register, handleSubmit } = useForm<Inputs>();
+    const { register, handleSubmit, reset } = useForm<Inputs>();
     const addToQueue: SubmitHandler<Inputs> = (data: any) => {
         console.log(data, "test done")
         fetch('https://duro.herokuapp.com/api/platform/requesters', {
@@ -52,8 +52,8 @@ const AdminSignupForm = () => {
             .then(response => response.json())
             .then(data =>{
                 if (data.success === true) {
-                    console.log(data)
                     alert("profile created!");
+                    reset();
                 }
             });
         }

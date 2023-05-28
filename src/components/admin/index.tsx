@@ -46,7 +46,7 @@ const Admin = () => {
 					<div className='flex flex-col items-center'>
 						<div ref={qrRef}>
 							<QrCode
-								url={`${window.location.origin}/queue?corporate_name=${admin.name}&admin_name=${admin.administrators[0].display_name}`}
+								url={`${window.location.origin}/queue?corporate_name=${admin.legal_name}&admin_name=${admin.administrators[0].display_name}`}
 							/>
 						</div>
 						<div className='mt-4'>

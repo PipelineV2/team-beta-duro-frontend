@@ -7,18 +7,33 @@ export interface ICorporation {
 	email: string;
 	name: string;
 	description: string;
-	legalName: string;
+	legal_name: string;
 	telephone: string;
 	url: string;
-	taxId: string;
-	vatId: string;
+	tax_id: string;
+	vat_id: string;
 }
 
 export interface IAdministrator {
 	email: string;
-	givenName: string;
-	familyName: string;
-	displayName: string;
+	given_name: string;
+	family_name: string;
+	display_name: string;
 	telephone: string;
-	jobTitle: string;
+	job_title: string;
+}
+
+export interface QueueParams {
+	coperate_name: string;
+	administrator_name: string;
+}
+export interface QueueDetails {
+	email: string;
+	given_name: string;
+	family_name: string;
+	display_name: string;
+	telephone: string;
+	job_title: string;
+	device_id: string;
+	location?: '0';
 }

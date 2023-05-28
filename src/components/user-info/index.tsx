@@ -14,24 +14,24 @@ const UserInfo: FC = () => {
 						<span className='text-base font-normal'>Greg</span>
 					</div>
 					<div className='flex justify-between items-center w-full'>
-						<p className='text-base font-semibold'>First Name:</p>
-						<span className='text-base font-normal'>Greg</span>
+						<p className='text-base font-semibold'>Last Name:</p>
+						<span className='text-base font-normal'>Neal</span>
 					</div>
 					<div className='flex justify-between items-center w-full'>
-						<p className='text-base font-semibold'>First Name:</p>
-						<span className='text-base font-normal'>Greg</span>
+						<p className='text-base font-semibold'>Email:</p>
+						<span className='text-base font-normal'>greg.neal@duro.com</span>
 					</div>
 					<div className='flex justify-between items-center w-full'>
-						<p className='text-base font-semibold'>First Name:</p>
-						<span className='text-base font-normal'>Greg</span>
+						<p className='text-base font-semibold'>Time Queued:</p>
+						<span className='text-base font-normal'>12:56pm</span>
 					</div>
 					<div className='flex justify-between items-center w-full'>
-						<p className='text-base font-semibold'>First Name:</p>
-						<span className='text-base font-normal'>Greg</span>
+						<p className='text-base font-semibold'>Phone number:</p>
+						<span className='text-base font-normal'>09228823829</span>
 					</div>
 					<div className='flex justify-between items-center w-full'>
-						<p className='text-base font-semibold'>First Name:</p>
-						<span className='text-base font-normal'>Greg</span>
+						<p className='text-base font-semibold'>Job Title:</p>
+						<span className='text-base font-normal'>Software Engineer</span>
 					</div>
 					<div className='flex justify-center'>
 						<Button>Leave the queue</Button>

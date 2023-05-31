@@ -16,3 +16,20 @@ export const AdminSignupValidation = Yup.object().shape({
 	adminPhone: Yup.string().required('Telephone is required'),
 	jobTitle: Yup.string().required('Job Title is required'),
 });
+
+export const formInitialValues = {
+	email: '',
+	name: '',
+	description: '',
+	legalName: '',
+	telephone: '',
+	url: '',
+	taxId: '',
+	vatId: '',
+	adminEmail: '',
+	givenName: '',
+	familyName: '',
+	displayName: '',
+	adminPhone: '',
+	jobTitle: '',
+};

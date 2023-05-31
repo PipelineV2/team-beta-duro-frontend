@@ -50,9 +50,12 @@ const Queue: FC = () => {
 										type='text'
 										name='given_name'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('given_name', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('given_name', e.target.value);
+											setFieldTouched('given_name', true);
+										}}
 										placeholder='Greg'
-										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
+										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
 									<ErrorMessage
 										render={(msg) => <span className='text-red-500 text-sm'>{msg}</span>}
@@ -65,9 +68,12 @@ const Queue: FC = () => {
 										type='text'
 										name='family_name'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('family_name', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('family_name', e.target.value);
+											setFieldTouched('family_name', true);
+										}}
 										placeholder='Neal'
-										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
+										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
 									<ErrorMessage
 										render={(msg) => <span className='text-red-500 text-sm'>{msg}</span>}
@@ -80,9 +86,12 @@ const Queue: FC = () => {
 										type='text'
 										name='display_name'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('display_name', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('display_name', e.target.value);
+											setFieldTouched('display_name', true);
+										}}
 										placeholder='SoloSmart'
-										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
+										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
 									<ErrorMessage
 										render={(msg) => <span className='text-red-500 text-sm'>{msg}</span>}
@@ -95,9 +104,12 @@ const Queue: FC = () => {
 										type='text'
 										name='email'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('email', e.target.value)}
-										placeholder='Greg'
-										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
+										onChange={(e) => {
+											setFieldValue('email', e.target.value);
+											setFieldTouched('email', true);
+										}}
+										placeholder='greg@example.com'
+										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
 									<ErrorMessage render={(msg) => <span className='text-red-500 text-sm'>{msg}</span>} name='email' />
 								</div>
@@ -107,9 +119,12 @@ const Queue: FC = () => {
 										type='text'
 										name='telephone'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('telephone', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('telephone', e.target.value);
+											setFieldTouched('telephone', true);
+										}}
 										placeholder='09123949443'
-										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
+										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
 									<ErrorMessage
 										render={(msg) => <span className='text-red-500 text-sm'>{msg}</span>}
@@ -122,9 +137,12 @@ const Queue: FC = () => {
 										type='text'
 										name='job_title'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('job_title', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('job_title', e.target.value);
+											setFieldTouched('job_title', true);
+										}}
 										placeholder='Farmer'
-										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
+										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
 									<ErrorMessage
 										render={(msg) => <span className='text-red-500 text-sm'>{msg}</span>}

@@ -1,5 +1,5 @@
 import { Formik, Form, ErrorMessage } from 'formik';
-import { AdminSignupValidation } from '../../validations/admin';
+import { formInitialValues, AdminSignupValidation } from '../../validations/admin';
 import { FaSpinner } from 'react-icons/fa';
 import { Button } from '../common';
 import { useAdminStore } from '../../store/admin';
@@ -7,28 +7,11 @@ import { useAdminStore } from '../../store/admin';
 const AdminSignup = () => {
 	const [addCorporation] = useAdminStore((state) => [state.addCorporation]);
 
-	const formInitialValues = {
-		email: '',
-		name: '',
-		description: '',
-		legalName: '',
-		telephone: '',
-		url: '',
-		taxId: '',
-		vatId: '',
-		adminEmail: '',
-		givenName: '',
-		familyName: '',
-		displayName: '',
-		adminPhone: '',
-		jobTitle: '',
-	};
-
 	return (
 		<Formik
 			initialValues={formInitialValues}
 			validationSchema={AdminSignupValidation}
-			onSubmit={(values) => {
+			onSubmit={(values, { setSubmitting }) => {
 				const corporation = {
 					email: values.email,
 					name: values.name,
@@ -48,9 +31,9 @@ const AdminSignup = () => {
 					telephone: values.adminPhone,
 					job_title: values.jobTitle,
 				};
-				addCorporation(corporation, administrator);
+				addCorporation(corporation, administrator, setSubmitting);
 			}}>
-			{({ setFieldValue, handleBlur, isSubmitting }) => (
+			{({ setFieldValue, setFieldTouched, handleBlur, isSubmitting }) => (
 				<Form>
 					<div className='container mx-auto py-16 px-4 sm:px-8 xl:px-16'>
 						<h3 className='text-center text-3xl mt-16 font-bold'>Corporate Signup</h3>
@@ -64,7 +47,10 @@ const AdminSignup = () => {
 										type='text'
 										name='name'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('name', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('name', e.target.value);
+											setFieldTouched('name', true);
+										}}
 										placeholder='Greg'
 										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
@@ -76,7 +62,10 @@ const AdminSignup = () => {
 										type='text'
 										name='email'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('email', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('email', e.target.value);
+											setFieldTouched('email', true);
+										}}
 										placeholder='abc@example.com'
 										className='border-2 border-gray border-solid pl-4 rounded h-10'
 									/>
@@ -88,7 +77,10 @@ const AdminSignup = () => {
 										rows={4}
 										name='description'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('description', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('description', e.target.value);
+											setFieldTouched('description', true);
+										}}
 										placeholder='Type something here...'
 										className='border-2 border-gray border-solid pl-4 rounded'
 									/>
@@ -103,7 +95,10 @@ const AdminSignup = () => {
 										type='text'
 										name='legalName'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('legalName', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('legalName', e.target.value);
+											setFieldTouched('legalName', true);
+										}}
 										placeholder='Ajasco'
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>
@@ -119,7 +114,10 @@ const AdminSignup = () => {
 										name='telephone'
 										placeholder='09129383448'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('telephone', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('telephone', e.target.value);
+											setFieldValue('telephone', true);
+										}}
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>
 									<ErrorMessage
@@ -133,7 +131,10 @@ const AdminSignup = () => {
 										type='text'
 										name='url'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('url', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('url', e.target.value);
+											setFieldTouched('url', true);
+										}}
 										placeholder='https://your-website.com'
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>
@@ -145,7 +146,10 @@ const AdminSignup = () => {
 										type='text'
 										name='taxId'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('taxId', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('taxId', e.target.value);
+											setFieldTouched('taxId', true);
+										}}
 										placeholder='12344558688'
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>
@@ -157,7 +161,10 @@ const AdminSignup = () => {
 										type='text'
 										name='vatId'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('vatId', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('vatId', e.target.value);
+											setFieldTouched('vatId', true);
+										}}
 										placeholder='V2993784847'
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>
@@ -173,7 +180,10 @@ const AdminSignup = () => {
 										type='text'
 										name='givenName'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('givenName', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('givenName', e.target.value);
+											setFieldTouched('givenName', true);
+										}}
 										placeholder='Greg'
 										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
 									/>
@@ -188,7 +198,10 @@ const AdminSignup = () => {
 										type='text'
 										name='familyName'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('familyName', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('familyName', e.target.value);
+											setFieldTouched('familyName', true);
+										}}
 										placeholder='Neal'
 										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
 									/>
@@ -203,7 +216,10 @@ const AdminSignup = () => {
 										type='text'
 										name='displayName'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('displayName', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('displayName', e.target.value);
+											setFieldTouched('displayName', true);
+										}}
 										placeholder='Ajasco'
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>
@@ -218,7 +234,10 @@ const AdminSignup = () => {
 										type='text'
 										name='adminEmail'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('adminEmail', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('adminEmail', e.target.value);
+											setFieldTouched('adminEmail', true);
+										}}
 										placeholder='abc@example.com'
 										className='border-2 border-gray border-solid pl-4 rounded h-10 mb-2'
 									/>
@@ -233,7 +252,10 @@ const AdminSignup = () => {
 										type='text'
 										name='adminPhone'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('adminPhone', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('adminPhone', e.target.value);
+											setFieldTouched('adminPhone', true);
+										}}
 										placeholder='09123848458'
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>
@@ -249,7 +271,10 @@ const AdminSignup = () => {
 										type='text'
 										name='jobTitle'
 										onBlur={handleBlur}
-										onChange={(e) => setFieldValue('jobTitle', e.target.value)}
+										onChange={(e) => {
+											setFieldValue('jobTitle', e.target.value);
+											setFieldTouched('jobTitle', true);
+										}}
 										placeholder='Software Engineer'
 										className='border-2 border-gray border-solid pl-4 h-10 rounded mb-2'
 									/>

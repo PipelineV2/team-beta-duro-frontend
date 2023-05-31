@@ -10,7 +10,11 @@ type State = {
 };
 
 type Action = {
-	addCorporation: (corporation: ICorporation, administrator: IAdministrator) => void;
+	addCorporation: (
+		corporation: ICorporation,
+		administrator: IAdministrator,
+		setSubmitting: (a: boolean) => void
+	) => void;
 };
 
 export const useAdminStore = create<State & Action>()(
@@ -19,7 +23,7 @@ export const useAdminStore = create<State & Action>()(
 			(set) => ({
 				admin: {},
 				error: {},
-				addCorporation: async (corporation: ICorporation, administrator: IAdministrator) => {
+				addCorporation: async (corporation: ICorporation, administrator: IAdministrator, setSubmitting) => {
 					const { response, error } = await addOrganization(corporation, administrator);
 
 					if (response) {
@@ -30,11 +34,12 @@ export const useAdminStore = create<State & Action>()(
 						window.location.assign('/admin');
 					}
 
-					if (error) {
+					if (error || !response) {
 						set(() => ({ error }));
 						toast.error(error.message, {
 							position: toast.POSITION.TOP_RIGHT,
 						});
+						setSubmitting(false);
 					}
 				},
 			}),

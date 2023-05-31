@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { toast } from 'react-toastify';
-import { queueUsers } from 'apis/endpoints';
-import { QueueDetails, QueueParams } from 'apis/types';
+import { dequeueUser, queueUsers } from 'apis/endpoints';
+import { DequeueParams, QueueDetails, QueueParams } from 'apis/types';
 
 type State = {
 	user: Record<string, any>;
@@ -11,6 +11,7 @@ type State = {
 
 type Action = {
 	joinQueue: (params: QueueParams, details: QueueDetails) => void;
+	leaveQueue: (params: DequeueParams) => void;
 };
 
 export const useQueueStore = create<State & Action>()(
@@ -19,6 +20,19 @@ export const useQueueStore = create<State & Action>()(
 			(set) => ({
 				user: {},
 				error: {},
+				leaveQueue: async (params) => {
+					const { response, error } = await dequeueUser(params);
+
+					if (response) {
+						set(() => ({ user: {}, error: {} }));
+					}
+
+					if (error) {
+						toast.error(error.message, {
+							position: toast.POSITION.TOP_RIGHT,
+						});
+					}
+				},
 				joinQueue: async (params: QueueParams, details: QueueDetails) => {
 					const { response, error } = await queueUsers(params, details);
 

@@ -37,3 +37,9 @@ export interface QueueDetails {
 	device_id: string;
 	location?: '0';
 }
+
+export interface DequeueParams {
+	coperate_id: string;
+	administrator_id: string;
+	telephone: string;
+}

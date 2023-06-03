@@ -2,11 +2,12 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { toast } from 'react-toastify';
 import { ICorporation, IAdministrator } from '../apis/types';
-import { addOrganization } from '../apis/endpoints';
+import { addOrganization, getOrganization, getQueuedUsers } from '../apis/endpoints';
 
 type State = {
 	error: Record<string, any>;
 	admin: Record<string, any>;
+	users: Record<string, any>[];
 };
 
 type Action = {
@@ -15,6 +16,8 @@ type Action = {
 		administrator: IAdministrator,
 		setSubmitting: (a: boolean) => void
 	) => void;
+	fetchCorporation: (corporate_id: string) => void;
+	fetchQueuedUsers: (a: string, b: string) => void;
 };
 
 export const useAdminStore = create<State & Action>()(
@@ -22,6 +25,7 @@ export const useAdminStore = create<State & Action>()(
 		persist(
 			(set) => ({
 				admin: {},
+				users: [],
 				error: {},
 				addCorporation: async (corporation: ICorporation, administrator: IAdministrator, setSubmitting) => {
 					const { response, error } = await addOrganization(corporation, administrator);
@@ -31,7 +35,7 @@ export const useAdminStore = create<State & Action>()(
 						toast.success('Account created successfully', {
 							position: toast.POSITION.TOP_RIGHT,
 						});
-						window.location.assign('/admin');
+						window.location.assign(`/admin/${response.id}`);
 					}
 
 					if (error || !response) {
@@ -40,6 +44,38 @@ export const useAdminStore = create<State & Action>()(
 							position: toast.POSITION.TOP_RIGHT,
 						});
 						setSubmitting(false);
+					}
+				},
+				fetchCorporation: async (corporate_id: string) => {
+					const { response, error } = await getOrganization(corporate_id);
+					if (response) {
+						set(() => ({ admin: response, error: {} }));
+						toast.success('Details refreshed successfully', {
+							position: toast.POSITION.TOP_RIGHT,
+						});
+					}
+
+					if (error || !response) {
+						set(() => ({ error }));
+						toast.error(error.message, {
+							position: toast.POSITION.TOP_RIGHT,
+						});
+					}
+				},
+				fetchQueuedUsers: async (corporate_id: string, administrator_id: string) => {
+					const { response, error } = await getQueuedUsers(corporate_id, administrator_id);
+					if (response) {
+						set(() => ({ users: response, error: {} }));
+						toast.success('Users fetched Successfully', {
+							position: toast.POSITION.TOP_RIGHT,
+						});
+					}
+
+					if (error || !response) {
+						set(() => ({ error }));
+						toast.error('Trouble fetching users', {
+							position: toast.POSITION.TOP_RIGHT,
+						});
 					}
 				},
 			}),

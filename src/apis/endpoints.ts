@@ -20,7 +20,19 @@ export const queueUsers = (params: QueueParams, data: QueueDetails) => {
 };
 
 export const dequeueUser = (body: DequeueParams) => {
-	return fetchClient(`requesters/${body.coperate_id}/${body.administrator_id}/dequeue/${body.telephone}`, {
+	return fetchClient(`platform/requesters/${body.coperate_id}/${body.administrator_id}/dequeue/${body.telephone}`, {
+		method: 'GET',
+	});
+};
+
+export const getOrganization = (corporate_id: string) => {
+	return fetchClient(`platform/requesters/${corporate_id}`, {
+		method: 'GET',
+	});
+};
+
+export const getQueuedUsers = (corporate_id: string, administrator_id: string) => {
+	return fetchClient(`platform/requesters/${corporate_id}/administrators/${administrator_id}/queue?status=inactive`, {
 		method: 'GET',
 	});
 };

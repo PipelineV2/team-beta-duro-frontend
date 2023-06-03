@@ -43,3 +43,7 @@ export interface DequeueParams {
 	administrator_id: string;
 	telephone: string;
 }
+
+export interface IFetchUsers {
+	corporate_id: string;
+}

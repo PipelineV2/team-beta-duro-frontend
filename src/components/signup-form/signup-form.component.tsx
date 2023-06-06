@@ -3,11 +3,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import {  Navigate } from "react-router-dom";
 
 type Inputs = {
-    firstName: string,
-    lastName: string,
-    emailAddress: string,
-    phoneNumber: string
-  };
+	firstName: string;
+	lastName: string;
+	emailAddress: string;
+	phoneNumber: string;
+};
 
 const SignupForm = () => {
     const { register, handleSubmit } = useForm<Inputs>();

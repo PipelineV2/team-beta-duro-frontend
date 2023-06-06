@@ -1,20 +1,20 @@
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import React from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 type Inputs = {
-    name: String,
-    firstName: string,
-    lastName: string,
-    emailAddress: string,
-    phoneNumber: string,
-    description: string,
-    legalName: string,
-    url: string,
-    taxID: string,
-    vatID: string,
-    displayName: string,
-    jobTitle: string
-  };
+	name: String;
+	firstName: string;
+	lastName: string;
+	emailAddress: string;
+	phoneNumber: string;
+	description: string;
+	legalName: string;
+	url: string;
+	taxID: string;
+	vatID: string;
+	displayName: string;
+	jobTitle: string;
+};
 
 const AdminSignupForm = () => {
     const { register, handleSubmit, reset } = useForm<Inputs>();
@@ -110,4 +110,4 @@ const AdminSignupForm = () => {
     )
 }
 
-export default AdminSignupForm
+export default AdminSignupForm;

@@ -4,7 +4,7 @@ import { useAdminStore } from '../../store/admin';
 import { Button, QrCode } from '../common';
 
 const Admin = () => {
-	const [admin, fetchCorporation, fetchQueuedUsers] = useAdminStore((state) => [
+	const [admin, fetchCorporation, fetchQueuedUsers, users] = useAdminStore((state) => [
 		state.admin,
 		state.fetchCorporation,
 		state.fetchQueuedUsers,
@@ -68,6 +68,35 @@ const Admin = () => {
 									<Button onClick={downloadQRCode}>Download QR Code</Button>
 								</div>
 							</div>
+						</div>
+						<div className='w-full overflow-x-scroll mt-16'>
+							<h3 className='text-2xl text-center font-semibold mb-8'>Users</h3>
+							<table className='table-auto w-full overflow-x-scroll border border-purple-600 border-collapse'>
+								<thead className='w-full max-w-full overflow-x-hidden'>
+									<tr>
+										<th className='border p-4'>Email</th>
+										<th className='border p-4'>Telephone</th>
+										<th className='border p-4'>Time Queued</th>
+										<th className='border p-4'>Time Dequeued</th>
+										<th className='border p-4'>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									{users.map((user) => (
+										<tr>
+											<td className='border p-4'>{user.email}</td>
+											<td className='border p-4'>{user.telephone}</td>
+											<td className='border p-4'>
+												{user.time_queued ? new Date(user.time_queued).toUTCString() : '---'}
+											</td>
+											<td className='border p-4 text-center'>
+												{user.time_dequeued ? new Date(user.time_dequeued).toUTCString() : '---'}
+											</td>
+											<td className='border p-4'>{user.status}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

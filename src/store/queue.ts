@@ -7,6 +7,7 @@ import { DequeueParams, QueueDetails, QueueParams } from 'apis/types';
 type State = {
 	user: Record<string, any>;
 	error: Record<string, any>;
+	loading: boolean;
 };
 
 type Action = {
@@ -20,11 +21,13 @@ export const useQueueStore = create<State & Action>()(
 			(set) => ({
 				user: {},
 				error: {},
+				loading: false,
 				leaveQueue: async (params) => {
+					set(() => ({ loading: true }));
 					const { response, error } = await dequeueUser(params);
 
 					if (response) {
-						set(() => ({ user: {}, error: {} }));
+						set(() => ({ user: {}, error: {}, loading: false }));
 					}
 
 					if (error) {

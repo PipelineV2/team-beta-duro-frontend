@@ -32,7 +32,7 @@ export const getOrganization = (corporate_id: string) => {
 };
 
 export const getQueuedUsers = (corporate_id: string, administrator_id: string) => {
-	return fetchClient(`platform/requesters/${corporate_id}/administrators/${administrator_id}/queue?status=inactive`, {
+	return fetchClient(`platform/requesters/${corporate_id}/administrators/${administrator_id}/queue`, {
 		method: 'GET',
 	});
 };

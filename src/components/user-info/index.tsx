@@ -6,7 +6,7 @@ import { useQueueStore } from 'store/queue';
 import { useAdminStore } from 'store/admin';
 
 const UserInfo: FC = () => {
-	const [user, leaveQueue] = useQueueStore((state) => [state.user, state.leaveQueue]);
+	const [user, leaveQueue, loading] = useQueueStore((state) => [state.user, state.leaveQueue, state.loading]);
 	const [admin] = useAdminStore((state) => [state.admin]);
 	const navigate = useNavigate();
 
@@ -39,11 +39,14 @@ const UserInfo: FC = () => {
 									telephone: user.telephone,
 								})
 							}>
-							<span className='inline-flex justify-center items-center'>
-								<FaSpinner className='animate-spin h-5 w-5 mr-3' />
-								Leaving...
-							</span>
-							{/* Leave the queue */}
+							{loading ? (
+								<span className='inline-flex justify-center items-center'>
+									<FaSpinner className='animate-spin h-5 w-5 mr-3' />
+									Leaving...
+								</span>
+							) : (
+								<span>Leave the queue</span>
+							)}
 						</Button>
 					</div>
 				</div>
@@ -58,7 +61,7 @@ const UserInfo: FC = () => {
 					<h3 className='text-3xl text-center font-semibold mt-4'>Or</h3>
 
 					<div className='flex justify-center mt-4'>
-						<Button onClick={() => navigate('/admin-signup')}>Join as an organization</Button>
+						<Button onClick={() => navigate('/admin-signup')}>Signup as an organization</Button>
 					</div>
 				</div>
 			)}

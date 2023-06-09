@@ -2,8 +2,10 @@ import { useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAdminStore } from '../../store/admin';
 import { Button, QrCode } from '../common';
+import { useQueueStore } from 'store/queue';
 
 const Admin = () => {
+	const [leaveQueue] = useQueueStore((state) => [state.leaveQueue]);
 	const [admin, fetchCorporation, fetchQueuedUsers, users] = useAdminStore((state) => [
 		state.admin,
 		state.fetchCorporation,
@@ -79,6 +81,7 @@ const Admin = () => {
 										<th className='border p-4'>Time Queued</th>
 										<th className='border p-4'>Time Dequeued</th>
 										<th className='border p-4'>Status</th>
+										<th className='border p-4'>Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -93,6 +96,21 @@ const Admin = () => {
 												{user.time_dequeued ? new Date(user.time_dequeued).toUTCString() : '---'}
 											</td>
 											<td className='border p-4'>{user.status}</td>
+											<td className='border p-4'>
+												{user.status === 'active' && (
+													<Button
+														className='px-2 text-sm'
+														onClick={() => {
+															leaveQueue({
+																coperate_id: admin.id,
+																administrator_id: admin.administrators[0].id,
+																telephone: user.telephone,
+															});
+														}}>
+														Dequeue
+													</Button>
+												)}
+											</td>
 										</tr>
 									))}
 								</tbody>

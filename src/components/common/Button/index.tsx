@@ -7,7 +7,7 @@ interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button: FC<IButton> = ({ children, className, ...rest }) => {
 	return (
-		<button className='bg-purple-800 text-white rounded py-2 px-16' {...rest}>
+		<button className={`${className} bg-purple-800 text-white rounded py-2 px-16`} {...rest}>
 			{children}
 		</button>
 	);

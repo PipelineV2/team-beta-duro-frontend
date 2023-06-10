@@ -1,24 +1,16 @@
 import { FC, useEffect } from 'react';
-import { FaSpinner } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/common';
 import { useQueueStore } from 'store/queue';
-import { useAdminStore } from 'store/admin';
 
 const UserInfo: FC = () => {
-	const [user, leaveQueue, loading, fetchUser] = useQueueStore((state) => [
-		state.user,
-		state.leaveQueue,
-		state.loading,
-		state.fetchUser,
-	]);
-	const [admin] = useAdminStore((state) => [state.admin]);
+	const [user, fetchUser, organization] = useQueueStore((state) => [state.user, state.fetchUser, state.organization]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		fetchUser({
-			coperate_name: admin.legal_name,
-			administrator_name: admin.administrators[0].display_name,
+			coperate_name: organization.corporate_name,
+			administrator_name: organization.admin_name,
 			telephone: user.telephone,
 			status: user.status,
 		});
@@ -44,7 +36,7 @@ const UserInfo: FC = () => {
 						<p className='text-base font-semibold'>Status</p>
 						<span className='text-base capitalize font-normal'>{user.status}</span>
 					</div>
-					<div className='flex justify-center mt-4'>
+					{/* <div className='flex justify-center mt-4'>
 						<Button
 							onClick={() =>
 								leaveQueue({
@@ -62,7 +54,7 @@ const UserInfo: FC = () => {
 								<span>Leave the queue</span>
 							)}
 						</Button>
-					</div>
+					</div> */}
 				</div>
 			) : (
 				<div>

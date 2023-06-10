@@ -87,7 +87,10 @@ const Admin = () => {
 								</thead>
 								<tbody>
 									{users
-										.sort((a, b) => a.time_queued - b.time_queued)
+										.sort(
+											(a, b) =>
+												(new Date(a.time_queued) as unknown as number) - (new Date(b.time_queued) as unknown as number)
+										)
 										.map((user, index) => (
 											<tr key={user.email}>
 												<td className='border p-4'>{index + 1}</td>
@@ -95,9 +98,7 @@ const Admin = () => {
 												<td className='border p-4'>{user.telephone}</td>
 												<td className='border p-4'>
 													{user.time_queued
-														? `${new Date(
-																new Date((new Date(user.time_queued) as unknown as number) + 2 * 60 * 60 * 1000)
-														  ).toLocaleString()}`
+														? `${new Date(new Date(new Date(user.time_queued) as unknown as number)).toLocaleString()}`
 														: '---'}
 												</td>
 												<td className='border p-4 text-center'>

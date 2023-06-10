@@ -7,6 +7,7 @@ import { DequeueParams, IUserDetails, QueueDetails, QueueParams } from 'apis/typ
 type State = {
 	user: Record<string, any>;
 	error: Record<string, any>;
+	organization: Record<string, any>;
 	loading: boolean;
 };
 
@@ -21,6 +22,7 @@ export const useQueueStore = create<State & Action>()(
 		persist(
 			(set) => ({
 				user: {},
+				organization: {},
 				error: {},
 				loading: false,
 				fetchUser: async (params: IUserDetails) => {
@@ -53,7 +55,11 @@ export const useQueueStore = create<State & Action>()(
 					const { response, error } = await queueUsers(params, details);
 
 					if (response) {
-						set(() => ({ user: response, error: {} }));
+						set(() => ({
+							user: response,
+							organization: { corporate_name: params.coperate_name, admin_name: params.administrator_name },
+							error: {},
+						}));
 						toast.success('You have successfully joined the queue.', {
 							position: toast.POSITION.TOP_RIGHT,
 						});

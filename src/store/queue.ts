@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { toast } from 'react-toastify';
-import { dequeueUser, queueUsers } from 'apis/endpoints';
-import { DequeueParams, QueueDetails, QueueParams } from 'apis/types';
+import { dequeueUser, getUserDetails, queueUsers } from 'apis/endpoints';
+import { DequeueParams, IUserDetails, QueueDetails, QueueParams } from 'apis/types';
 
 type State = {
 	user: Record<string, any>;
@@ -13,6 +13,7 @@ type State = {
 type Action = {
 	joinQueue: (params: QueueParams, details: QueueDetails) => void;
 	leaveQueue: (params: DequeueParams) => void;
+	fetchUser: (params: IUserDetails) => void;
 };
 
 export const useQueueStore = create<State & Action>()(
@@ -22,12 +23,24 @@ export const useQueueStore = create<State & Action>()(
 				user: {},
 				error: {},
 				loading: false,
+				fetchUser: async (params: IUserDetails) => {
+					const { response, error } = await getUserDetails(params);
+					if (response) {
+						set(() => ({ user: response, error: {}, loading: false }));
+					}
+
+					if (error) {
+						toast.error(error.message, {
+							position: toast.POSITION.TOP_RIGHT,
+						});
+					}
+				},
 				leaveQueue: async (params) => {
 					set(() => ({ loading: true }));
 					const { response, error } = await dequeueUser(params);
 
 					if (response) {
-						set(() => ({ user: {}, error: {}, loading: false }));
+						set(() => ({ error: {}, loading: false }));
 					}
 
 					if (error) {

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/common';
@@ -6,9 +6,23 @@ import { useQueueStore } from 'store/queue';
 import { useAdminStore } from 'store/admin';
 
 const UserInfo: FC = () => {
-	const [user, leaveQueue, loading] = useQueueStore((state) => [state.user, state.leaveQueue, state.loading]);
+	const [user, leaveQueue, loading, fetchUser] = useQueueStore((state) => [
+		state.user,
+		state.leaveQueue,
+		state.loading,
+		state.fetchUser,
+	]);
 	const [admin] = useAdminStore((state) => [state.admin]);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		fetchUser({
+			coperate_name: admin.legal_name,
+			administrator_name: admin.administrators[0].display_name,
+			telephone: user.telephone,
+			status: user.status,
+		});
+	}, []);
 
 	return (
 		<div className='container h-screen flex justify-center items-center mx-auto py-16 px-4 sm:px-8 xl:px-16'>

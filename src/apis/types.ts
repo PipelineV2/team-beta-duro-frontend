@@ -47,3 +47,10 @@ export interface DequeueParams {
 export interface IFetchUsers {
 	corporate_id: string;
 }
+
+export interface IUserDetails {
+	coperate_name: string;
+	administrator_name: string;
+	telephone: string;
+	status: string;
+}

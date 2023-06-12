@@ -50,9 +50,6 @@ export const useAdminStore = create<State & Action>()(
 					const { response, error } = await getOrganization(corporate_id);
 					if (response) {
 						set(() => ({ admin: response, error: {} }));
-						toast.success('Details refreshed successfully', {
-							position: toast.POSITION.TOP_RIGHT,
-						});
 					}
 
 					if (error || !response) {
@@ -66,9 +63,6 @@ export const useAdminStore = create<State & Action>()(
 					const { response, error } = await getQueuedUsers(corporate_id, administrator_id);
 					if (response) {
 						set(() => ({ users: response, error: {} }));
-						toast.success('Users fetched Successfully', {
-							position: toast.POSITION.TOP_RIGHT,
-						});
 					}
 
 					if (error || !response) {

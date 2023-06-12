@@ -1,14 +1,20 @@
-import { FC } from 'react';
-import { FaSpinner } from 'react-icons/fa';
+import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/common';
 import { useQueueStore } from 'store/queue';
-import { useAdminStore } from 'store/admin';
 
 const UserInfo: FC = () => {
-	const [user, leaveQueue] = useQueueStore((state) => [state.user, state.leaveQueue]);
-	const [admin] = useAdminStore((state) => [state.admin]);
+	const [user, fetchUser, organization] = useQueueStore((state) => [state.user, state.fetchUser, state.organization]);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		fetchUser({
+			coperate_name: organization.corporate_name,
+			administrator_name: organization.admin_name,
+			telephone: user.telephone,
+			status: user.status,
+		});
+	}, []);
 
 	return (
 		<div className='position: absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y -1/2  mx-auto py-16 px-4 sm:px-8 xl:px-16'>
@@ -30,7 +36,7 @@ const UserInfo: FC = () => {
 						<p className='text-base font-semibold'>Status</p>
 						<span className='text-base capitalize font-normal'>{user.status}</span>
 					</div>
-					<div className='flex justify-center mt-4'>
+					{/* <div className='flex justify-center mt-4'>
 						<Button
 							onClick={() =>
 								leaveQueue({
@@ -39,13 +45,16 @@ const UserInfo: FC = () => {
 									telephone: user.telephone,
 								})
 							}>
-							<span className='inline-flex justify-center items-center'>
-								<FaSpinner className='animate-spin h-5 w-5 mr-3' />
-								Leaving...
-							</span>
-							{/* Leave the queue */}
+							{loading ? (
+								<span className='inline-flex justify-center items-center'>
+									<FaSpinner className='animate-spin h-5 w-5 mr-3' />
+									Leaving...
+								</span>
+							) : (
+								<span>Leave the queue</span>
+							)}
 						</Button>
-					</div>
+					</div> */}
 				</div>
 			) : (
 				<div>
@@ -58,7 +67,7 @@ const UserInfo: FC = () => {
 					<h3 className='text-3xl text-center font-semibold mt-4'>Or</h3>
 
 					<div className='flex justify-center mt-4'>
-						<Button onClick={() => navigate('/admin-signup')}>Join as an organization</Button>
+						<Button onClick={() => navigate('/admin-signup')}>Signup as an organization</Button>
 					</div>
 				</div>
 			)}

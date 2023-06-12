@@ -1,5 +1,5 @@
 import fetchClient from '.';
-import { ICorporation, IAdministrator, QueueDetails, QueueParams, DequeueParams } from './types';
+import { ICorporation, IAdministrator, QueueDetails, QueueParams, DequeueParams, IUserDetails } from './types';
 
 export const fetchCorporateDetails = (corporateId: string) => {
 	return fetchClient(`platform/requesters${corporateId}`);
@@ -32,7 +32,16 @@ export const getOrganization = (corporate_id: string) => {
 };
 
 export const getQueuedUsers = (corporate_id: string, administrator_id: string) => {
-	return fetchClient(`platform/requesters/${corporate_id}/administrators/${administrator_id}/queue?status=inactive`, {
+	return fetchClient(`platform/requesters/${corporate_id}/administrators/${administrator_id}/queue`, {
 		method: 'GET',
 	});
+};
+
+export const getUserDetails = ({ coperate_name, administrator_name, telephone, status }: IUserDetails) => {
+	return fetchClient(
+		`requester/${coperate_name}/${administrator_name}/queue_users?telehone=${telephone}&status=${status}`,
+		{
+			method: 'GET',
+		}
+	);
 };

@@ -5,7 +5,7 @@ export const QueueSchema = Yup.object().shape({
 	given_name: Yup.string().required('First Name is required'),
 	family_name: Yup.string().required('Last Name is required'),
 	display_name: Yup.string().required('Display Name is required'),
-	telephone: Yup.string(),
+	telephone: Yup.string().required('Telephone is required'),
 	job_title: Yup.string(),
 });
 

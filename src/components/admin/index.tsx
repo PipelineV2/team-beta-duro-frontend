@@ -2,9 +2,11 @@ import { useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAdminStore } from '../../store/admin';
 import { Button, QrCode } from '../common';
+import { useQueueStore } from 'store/queue';
 
 const Admin = () => {
-	const [admin, fetchCorporation, fetchQueuedUsers] = useAdminStore((state) => [
+	const [leaveQueue] = useQueueStore((state) => [state.leaveQueue]);
+	const [admin, fetchCorporation, fetchQueuedUsers, users] = useAdminStore((state) => [
 		state.admin,
 		state.fetchCorporation,
 		state.fetchQueuedUsers,
@@ -68,6 +70,60 @@ const Admin = () => {
 									<Button onClick={downloadQRCode}>Download QR Code</Button>
 								</div>
 							</div>
+						</div>
+						<div className='w-full overflow-x-scroll mt-16'>
+							<h3 className='text-2xl text-center font-semibold mb-8'>Users</h3>
+							<table className='table-auto w-full overflow-x-scroll border border-purple-600 border-collapse'>
+								<thead className='w-full max-w-full overflow-x-hidden'>
+									<tr>
+										<th className='border p-4'>S/N</th>
+										<th className='border p-4'>Email</th>
+										<th className='border p-4'>Telephone</th>
+										<th className='border p-4'>Time Queued</th>
+										<th className='border p-4'>Time Dequeued</th>
+										<th className='border p-4'>Status</th>
+										<th className='border p-4'>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{users
+										.sort(
+											(a, b) =>
+												(new Date(a.time_queued) as unknown as number) - (new Date(b.time_queued) as unknown as number)
+										)
+										.map((user, index) => (
+											<tr key={user.email}>
+												<td className='border p-4'>{index + 1}</td>
+												<td className='border p-4'>{user.email}</td>
+												<td className='border p-4'>{user.telephone}</td>
+												<td className='border p-4'>
+													{user.time_queued
+														? `${new Date(new Date(new Date(user.time_queued) as unknown as number)).toLocaleString()}`
+														: '---'}
+												</td>
+												<td className='border p-4 text-center'>
+													{user.time_dequeued ? new Date(user.time_dequeued).toLocaleTimeString() : '---'}
+												</td>
+												<td className='border p-4'>{user.status}</td>
+												<td className='border p-4'>
+													{user.status === 'active' && (
+														<Button
+															className='px-2 text-sm'
+															onClick={() => {
+																leaveQueue({
+																	coperate_id: admin.id,
+																	administrator_id: admin.administrators[0].id,
+																	telephone: user.telephone,
+																});
+															}}>
+															Dequeue
+														</Button>
+													)}
+												</td>
+											</tr>
+										))}
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

@@ -19,11 +19,11 @@ const fetchClient = async (endpoint: string, { body, ...customConfig }: CustomCo
 
 	if (result.ok) {
 		const response = await result.json();
-		return response;
+		return { response };
 	} else {
 		const errorMessage = await result.text();
 		Promise.reject(new Error(errorMessage));
-		return JSON.parse(errorMessage);
+		return { error: JSON.parse(errorMessage) };
 	}
 };
 

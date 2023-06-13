@@ -17,7 +17,7 @@ const UserInfo: FC = () => {
 	}, []);
 
 	return (
-		<div className='position: absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y -1/2  mx-auto py-16 px-4 sm:px-8 xl:px-16'>
+		<div className='position: absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto py-16 px-4 sm:px-8 xl:px-16'>
 			{Object.keys(user).length > 0 ? (
 				<div className='shadow-md flex flex-col gap-4 w-80 p-4 rounded-md'>
 					<div className='flex justify-between items-center w-full'>
